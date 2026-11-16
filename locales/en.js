@@ -177,6 +177,8 @@ const en = {
     "rangColor": "Pick color",    // Keep this short
     "opacityTitle": "Opacity",
     "adjustOpacityDesc": "Adjust interface transparency",
+    "dimTitle": "Dim wallpaper",
+    "dimDesc": "Darken the wallpaper behind widgets",
     "backupText": "Backup",
     "restoreText": "Restore",
     "resetsettings": "Reset Settings",

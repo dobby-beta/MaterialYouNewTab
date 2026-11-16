@@ -254,6 +254,8 @@ function applyLanguage(lang) {
         "resetAISettingsBtn",
         "opacityTitle",
         "adjustOpacityDesc",
+        "dimTitle",
+        "dimDesc",
         "footerToastTitle",
         "footerToastMessage",
         "personalizationSectionTitle",
