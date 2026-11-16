@@ -26,6 +26,12 @@
         root.style.setProperty('--transparency', `${Math.round(Number(savedOpacity))}%`);
     }
 
+    // --- Wallpaper dim (0-80%) ---
+    const savedDim = Number(localStorage.getItem('bgDim'));
+    if (savedDim) {
+        root.style.setProperty('--bg-dim', Math.min(80, Math.max(0, savedDim)) / 100);
+    }
+
     // Watch for the <body> to be created and instantly set it to "wallpaper" before the screen paints
     // if (localStorage.getItem('hasWallpaper') === 'true') {
     //     const observer = new MutationObserver(function () {

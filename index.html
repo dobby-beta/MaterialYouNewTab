@@ -28,6 +28,7 @@
     <script defer src="scripts/alert-modal.js"></script>
     <script defer src="scripts/wallpaper.js"></script>
     <script defer src="scripts/widgets-transparency.js"></script>
+    <script defer src="scripts/wallpaper-dim.js"></script>
     <script defer src="scripts/clock.js"></script>
     <script defer src="scripts/weather.js"></script>
     <script defer src="scripts/custom-text.js"></script>
@@ -1795,6 +1796,26 @@
                                         </div>
                                     </div>
                                     <!-- End of opacity Bar Control -->
+
+                                    <!-- Wallpaper Dim Bar Control  -->
+                                    <div id="dimBarControl" class="opacityBarControl">
+                                        <div class="ttcont">
+                                            <div class="texts">
+                                                <div class="bigText" id="dimTitle">Dim wallpaper</div>
+                                                <div class="infoText" id="dimDesc">Darken the wallpaper behind
+                                                    widgets</div>
+                                            </div>
+                                        </div>
+                                        <div class="opacityBar" id="dimBar" role="slider" tabindex="0"
+                                            aria-labelledby="dimTitle" aria-valuemin="0" aria-valuemax="80"
+                                            aria-valuenow="0">
+                                            <div class="thinLine"></div>
+                                            <div class="opacitySlider" id="dimSlider">
+                                                <div id="dimLevel">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Wallpaper Dim Bar Control -->
                                 </div>
                             </div>
                         </div>
