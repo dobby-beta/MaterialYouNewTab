@@ -225,6 +225,28 @@ async function initializeClock() {
         return newTotal;
     }
 
+    // Sweeps the second hand: each tick animates (linearly, over 1s) to where the hand will be 1s from now,
+    // so the hand moves at a steady speed. Snaps to the right place after a gap (first paint, hidden tab, sleep).
+    let lastSecondTick = 0;
+    function updateSecondHand(now) {
+        const el = document.getElementById("second");
+        const exact = (now.getSeconds() + now.getMilliseconds() / 1000) * 6;
+        const snap = now.getTime() - lastSecondTick > 2000;
+        lastSecondTick = now.getTime();
+
+        // Pick the equivalent angle closest to the previous one, so the hand never spins backwards at 59s→0s
+        const aim = (angle) => angle + Math.round((cumulativeSecondRotation - angle) / 360) * 360;
+
+        if (snap) {
+            el.style.transition = "none";
+            el.style.transform = `rotate(${aim(exact)}deg)`;
+            el.offsetWidth; // flush so the jump is not animated
+        }
+        cumulativeSecondRotation = aim(exact + 6);
+        el.style.transition = "transform 1s linear";
+        el.style.transform = `rotate(${cumulativeSecondRotation}deg)`;
+    }
+
     function updateanalogclock() {
         var currentTime = new Date();
         var currentSeconds = currentTime.getSeconds();
@@ -242,7 +264,11 @@ async function initializeClock() {
         const hourReset = currentHours % 12 === 0 && currentMinutes === 0 && currentSeconds === 0;
 
         // Update each hand using the helper function
-        cumulativeSecondRotation = updateHandRotation("second", newSecondRotation, cumulativeSecondRotation, secondReset);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            cumulativeSecondRotation = updateHandRotation("second", newSecondRotation, cumulativeSecondRotation, secondReset);
+        } else {
+            updateSecondHand(currentTime);
+        }
         cumulativeMinuteRotation = updateHandRotation("minute", newMinuteRotation, cumulativeMinuteRotation, minuteReset);
         cumulativeHourRotation = updateHandRotation("hour", newHourRotation, cumulativeHourRotation, hourReset);
 
