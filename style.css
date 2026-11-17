@@ -4767,17 +4767,23 @@ body[data-bg="wallpaper"] .dropdown-content {
 		margin-inline-end: auto;
 	}
 	.shortcutsContainer {
-		row-gap: 2rem;
+		/* one row: wrapping into a second row gets cut off by the fixed-height section */
+		flex-wrap: nowrap;
+		max-width: none;
 	}
 	#shortcuts-section {
-		padding-inline-start: 30px;
 		margin: 0 auto;
 		overflow-x: scroll;
 		scrollbar-width: none;
 		position: fixed;
-		max-width: 40rem;
+		max-width: none;
 		inset-inline-start: 0;
 		bottom: 0;
+		/* centred when it fits, scrolls from the start edge when it doesn't */
+		justify-content: flex-start;
+	}
+	#shortcuts-section .wrapper {
+		margin-inline: auto;
 	}
 }
 

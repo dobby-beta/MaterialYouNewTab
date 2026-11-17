@@ -28,6 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
         resetShortcutsButton: document.getElementById("resetButton"),
     };
 
+    // Allow horizontal scrolling of the dock with the mouse wheel (scrollbar is hidden)
+    dom.shortcuts.addEventListener("wheel", (event) => {
+        if (dom.shortcuts.scrollWidth > dom.shortcuts.clientWidth && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+            event.preventDefault();
+            dom.shortcuts.scrollLeft += event.deltaY;
+        }
+    }, { passive: false });
+
     // Preset Data
     const presets = [
         {
